@@ -1,4 +1,4 @@
-function Todo ({ handleChange }) {
+function Todo ({ handleChange, handleSubmit, todos, deleteItem }) {
     return (
         <div>
             <div>
@@ -7,12 +7,18 @@ function Todo ({ handleChange }) {
                     <input 
                         type="text" 
                         placeholder="Create a new todo..." 
-                        onChange={(e) => handleChange(e)}
+                        onChange={handleChange}
                     />
+                    <button onClick={handleSubmit}>Add</button>
                 </header>
-                <form>
-
-                </form>
+                <ul>
+                    {todos.map(i => (
+                        <div>
+                            <li key={i.id}>{i.item}</li>
+                            <button onClick={() => deleteItem(i)}>Delete</button>
+                        </div>
+                    ))}
+                </ul>
             </div>
         </div>
     )
