@@ -1,40 +1,42 @@
-import { useState } from "react";
-import Todo from "./Todo";
+import { useState } from "react"
+import Todo from "./Todo"
 
 function TodoContainer () {
     let nextId = 0
-    const [item, setItem] = useState('');
-    const [todos, setTodos] = useState([]);
+    const [todo, setTodo] = useState('')
+    const [todoList, setTodoList] = useState([])
 
     const handleChange = (e) => {
-        setItem(e.target.value);
+        setTodo(e.target.value)
     }
 
-    const handleSubmit = () => {
-        setTodos([
-            ...todos,
-            {id: nextId++, item: item}
-        ])
+    const addTodo = () => {
+        if (todo !== "") {
+            setTodoList([
+                ...todoList,
+                {id: nextId++, todo: todo}
+            ])
+        }
     }
 
     const deleteItem = (text) => {
-        const newTodos = todos.filter((todo) => {
-            return todo !== text;
-        });
-        setTodos(newTodos);
+        const newTodos = todoList.filter((todo) => {
+            return todo !== text
+        })
+        setTodoList(newTodos)
     }
 
-    console.log(todos)
+    console.log(todoList)
 
     return (
         <Todo 
             handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            todos={todos}
-            item={item}
+            addTodo={addTodo}
+            todoList={todoList}
+            todo={todo}
             deleteItem={deleteItem}
         />
     )
 }
 
-export default TodoContainer;
+export default TodoContainer

@@ -1,4 +1,4 @@
-function Todo ({ handleChange, handleSubmit, todos, deleteItem }) {
+function Todo ({ handleChange, addTodo, todoList, deleteItem }) {
     return (
         <div>
             <div>
@@ -9,13 +9,13 @@ function Todo ({ handleChange, handleSubmit, todos, deleteItem }) {
                         placeholder="Create a new todo..." 
                         onChange={handleChange}
                     />
-                    <button onClick={handleSubmit}>Add</button>
+                    <button onClick={addTodo}>Add</button>
                 </header>
                 <ul>
-                    {todos.map(i => (
+                    {todoList.map((item) => (
                         <div>
-                            <li key={i.id}>{i.item}</li>
-                            <button onClick={() => deleteItem(i)}>Delete</button>
+                            <li key={item.id}>{item.todo}</li>
+                            <button onClick={() => deleteItem(item)}>Delete</button>
                         </div>
                     ))}
                 </ul>
@@ -24,4 +24,4 @@ function Todo ({ handleChange, handleSubmit, todos, deleteItem }) {
     )
 }
 
-export default Todo;
+export default Todo
