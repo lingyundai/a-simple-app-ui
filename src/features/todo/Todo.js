@@ -1,4 +1,4 @@
-function Todo ({ handleChange, addTodo, todoList, deleteItem }) {
+function Todo ({ handleChange, todo }) {
     return (
         <div>
             <div>
@@ -9,16 +9,16 @@ function Todo ({ handleChange, addTodo, todoList, deleteItem }) {
                         placeholder="Create a new todo..." 
                         onChange={handleChange}
                     />
-                    <button onClick={addTodo}>Add</button>
+                    <button onClick={todo}>Add</button>
                 </header>
-                <ul>
+                {/* <ul>
                     {todoList.map((item) => (
                         <div>
                             <li key={item.id}>{item.todo}</li>
                             <button onClick={() => deleteItem(item)}>Delete</button>
                         </div>
                     ))}
-                </ul>
+                </ul> */}
             </div>
         </div>
     )
