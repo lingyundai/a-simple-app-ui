@@ -1,49 +1,36 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Todo from "./Todo"
-import { useSelector } from "react-redux"
-import { todoAdded } from "./todoSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { addTodo, removeTodo } from "./todoSlice"
 
 function TodoContainer () {
-    const todoAdd = useSelector(todoAdded)
-
-    let nextId = 0
-    const [todo, setTodo] = useState(todoAdd)
-    // const [todoList, setTodoList] = useState([])
+    const todos = useSelector((state) => state.todo.todos)
+    console.log(todos)
+    const dispatch = useDispatch()
+    const [text, setText] = useState("")
 
     const handleChange = (e) => {
-        setTodo(e.target.value)
+        setText(e.target.value)
     }
 
-    // const addTodo = () => {
-    //     if (todo !== "") {
-    //         setTodoList([
-    //             ...todoList,
-    //             {id: todoAdd.payload.id, todo: todo}
-    //         ])
-    //     }
-    // }
-
-    // const deleteItem = (text) => {
-    //     const newTodos = todoList.filter((todo) => {
-    //         return todo !== text
-    //     })
-    //     setTodoList(newTodos)
-    // }
-    useEffect(() => {
-        if (todo !== "") {
-            setTodo(todoAdd)
+    const handleAddTodo = () => {
+        if (text) {
+            dispatch(addTodo(text))
+            setText("")
         }
-    }, [todoAdd])
+    }
 
-    // console.log(todoList)
+    const handleRemoveTodo = (id) => {
+        dispatch(removeTodo(id))
+    }
 
     return (
         <Todo 
             handleChange={handleChange}
-            // addTodo={addTodo}
-            // todoList={todoList}
-            todo={todo}
-            // deleteItem={deleteItem}
+            handleAddTodo={handleAddTodo}
+            handleRemoveTodo ={handleRemoveTodo}
+            todos={todos}
+            text={text}
         />
     )
 }

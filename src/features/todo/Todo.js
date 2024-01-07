@@ -1,4 +1,9 @@
-function Todo ({ handleChange, todo }) {
+function Todo ({ handleChange, todos, handleAddTodo, handleRemoveTodo, text }) {
+    const listItems = todos.map(todo => 
+        <li key={todo.id}>
+            {todo.text} 
+            <button onClick={()=>handleRemoveTodo(todo.id)}>Remove</button>
+        </li>)
     return (
         <div>
             <div>
@@ -8,17 +13,13 @@ function Todo ({ handleChange, todo }) {
                         type="text" 
                         placeholder="Create a new todo..." 
                         onChange={handleChange}
+                        value={text}
                     />
-                    <button onClick={todo}>Add</button>
+                    <button onClick={handleAddTodo}>Add</button>
                 </header>
-                {/* <ul>
-                    {todoList.map((item) => (
-                        <div>
-                            <li key={item.id}>{item.todo}</li>
-                            <button onClick={() => deleteItem(item)}>Delete</button>
-                        </div>
-                    ))}
-                </ul> */}
+                <ul>
+                    {listItems}
+                </ul>
             </div>
         </div>
     )
