@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 function Todo ({ handleChange, todos, handleAddTodo, 
     handleRemoveTodo, text, handleCheckedTodo }) {
     const listItems = todos.map(todo => 

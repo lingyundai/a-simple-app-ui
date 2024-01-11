@@ -5,9 +5,10 @@ import { addTodo, removeTodo, checkTodo } from "./todoSlice"
 
 function TodoContainer () {
     const todos = useSelector((state) => state.todo.todos)
-    console.log(todos)
     const dispatch = useDispatch()
     const [text, setText] = useState("")
+
+    console.log(todos)
 
     const handleChange = (e) => {
         setText(e.target.value)
