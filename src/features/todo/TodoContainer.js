@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Todo from "./Todo"
 import { useDispatch, useSelector } from "react-redux"
-import { addTodo, removeTodo } from "./todoSlice"
+import { addTodo, removeTodo, checkTodo } from "./todoSlice"
 
 function TodoContainer () {
     const todos = useSelector((state) => state.todo.todos)
@@ -11,6 +11,10 @@ function TodoContainer () {
 
     const handleChange = (e) => {
         setText(e.target.value)
+    }
+
+    const handleCheckedTodo = (id) => {
+        dispatch(checkTodo(id))
     }
 
     const handleAddTodo = () => {
@@ -28,7 +32,8 @@ function TodoContainer () {
         <Todo 
             handleChange={handleChange}
             handleAddTodo={handleAddTodo}
-            handleRemoveTodo ={handleRemoveTodo}
+            handleRemoveTodo={handleRemoveTodo}
+            handleCheckedTodo={handleCheckedTodo}
             todos={todos}
             text={text}
         />
