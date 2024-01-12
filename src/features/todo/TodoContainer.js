@@ -7,6 +7,8 @@ function TodoContainer () {
     const todos = useSelector((state) => state.todo.todos)
     const dispatch = useDispatch()
     const [text, setText] = useState("")
+    const [completed, setCompleted] = useState([])
+    const [showCompleted, setShowCompleted] = useState(false)
 
     console.log(todos)
 
@@ -16,7 +18,25 @@ function TodoContainer () {
 
     const handleCheckedTodo = (id) => {
         dispatch(checkTodo(id))
+        handleCompletedTodo()
     }
+
+    const handleCompletedTodo = () => {
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].completed == true) {
+                const completedTodos = todos.filter(todo => todo.completed)
+                setCompleted(completedTodos)
+                console.log("here", completedTodos)
+            }
+        }
+    }
+
+    console.log("completed list", completed)
+
+    const handleShowCompleted = () => {
+        setShowCompleted(true)
+    }
+    console.log("showww", showCompleted)
 
     const handleAddTodo = () => {
         if (text) {
@@ -35,6 +55,10 @@ function TodoContainer () {
             handleAddTodo={handleAddTodo}
             handleRemoveTodo={handleRemoveTodo}
             handleCheckedTodo={handleCheckedTodo}
+            handleShowCompleted={handleShowCompleted}
+            // handleCompletedTodo={handleCompletedTodo}
+            completed={completed}
+            showCompleted={showCompleted}
             todos={todos}
             text={text}
         />

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     id: 0,
     todos: [],
+    completed: [],
 }
 
 const todoSlice = createSlice({

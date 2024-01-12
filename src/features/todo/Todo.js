@@ -1,7 +1,20 @@
 function Todo ({ handleChange, todos, handleAddTodo, 
-    handleRemoveTodo, text, handleCheckedTodo }) {
-    const listItems = todos.map(todo => 
-        <li key={todo.id}>
+    handleRemoveTodo, text, handleCheckedTodo, handleCompletedTodo,
+    completed, handleShowCompleted, showCompleted }) {
+    const listItems = showCompleted 
+        ? completed.map(completedTodo => 
+        <li key={completedTodo.id}>
+            <input type="checkbox" 
+                    id="check-list-item" 
+                    name="list-item-checkbox"
+                    onClick={() => handleCheckedTodo(completedTodo.id)}
+                    />
+                {completedTodo.text} 
+            <button onClick={()=>handleRemoveTodo(completedTodo.id)}>X</button>
+        </li>) 
+        : todos.map(todo => 
+        <li key={todo.id}
+            class={todo.completed ? "line-through" : 'none'}>
             <input type="checkbox" 
                     id="check-list-item" 
                     name="list-item-checkbox"
@@ -10,6 +23,7 @@ function Todo ({ handleChange, todos, handleAddTodo,
                 {todo.text} 
             <button onClick={()=>handleRemoveTodo(todo.id)}>X</button>
         </li>)
+    console.log("show heeeee", showCompleted)
     return (
         <div>
             <div>
@@ -26,6 +40,11 @@ function Todo ({ handleChange, todos, handleAddTodo,
                 <ul>
                     {listItems}
                 </ul>
+            </div>
+            <div>
+                <button>All</button>
+                <button>Active</button>
+                <button onClick={handleShowCompleted}>Completed</button>
             </div>
         </div>
     )
