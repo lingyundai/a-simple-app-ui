@@ -5,12 +5,12 @@ import { addTodo, removeTodo, checkTodo } from "./todoSlice"
 
 function TodoContainer () {
     const todos = useSelector((state) => state.todo.todos)
+    const completed = useSelector(state => state.todo.completed)
     const dispatch = useDispatch()
     const [text, setText] = useState("")
-    const [completed, setCompleted] = useState([])
     const [showCompleted, setShowCompleted] = useState(false)
 
-    console.log(todos)
+    console.log("todos", todos)
 
     const handleChange = (e) => {
         setText(e.target.value)
@@ -18,25 +18,13 @@ function TodoContainer () {
 
     const handleCheckedTodo = (id) => {
         dispatch(checkTodo(id))
-        handleCompletedTodo()
-    }
-
-    const handleCompletedTodo = () => {
-        for (let i = 0; i < todos.length; i++) {
-            if (todos[i].completed == true) {
-                const completedTodos = todos.filter(todo => todo.completed)
-                setCompleted(completedTodos)
-                console.log("here", completedTodos)
-            }
-        }
     }
 
     console.log("completed list", completed)
 
     const handleShowCompleted = () => {
-        setShowCompleted(true)
+        setShowCompleted(!showCompleted)
     }
-    console.log("showww", showCompleted)
 
     const handleAddTodo = () => {
         if (text) {
@@ -56,7 +44,6 @@ function TodoContainer () {
             handleRemoveTodo={handleRemoveTodo}
             handleCheckedTodo={handleCheckedTodo}
             handleShowCompleted={handleShowCompleted}
-            // handleCompletedTodo={handleCompletedTodo}
             completed={completed}
             showCompleted={showCompleted}
             todos={todos}

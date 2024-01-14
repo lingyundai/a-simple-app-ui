@@ -23,6 +23,12 @@ const todoSlice = createSlice({
             const todo = state.todos.find(t => t.id === action.payload)
             if (todo) {
                 todo.completed = !todo.completed;
+                console.log("slice", todo.completed)
+                if (todo.completed == true) {
+                    state.completed.push(todo)
+                } else {
+                    state.completed = state.completed.filter((t) => t.id !== action.payload)
+                }
             }
         },
         removeTodo: (state, action) => {

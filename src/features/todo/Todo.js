@@ -1,6 +1,6 @@
 function Todo ({ handleChange, todos, handleAddTodo, 
-    handleRemoveTodo, text, handleCheckedTodo, handleCompletedTodo,
-    completed, handleShowCompleted, showCompleted }) {
+    handleRemoveTodo, text, handleCheckedTodo,
+    handleShowCompleted, showCompleted, completed }) {
     const listItems = showCompleted 
         ? completed.map(completedTodo => 
         <li key={completedTodo.id}>
@@ -23,11 +23,13 @@ function Todo ({ handleChange, todos, handleAddTodo,
                 {todo.text} 
             <button onClick={()=>handleRemoveTodo(todo.id)}>X</button>
         </li>)
-    console.log("show heeeee", showCompleted)
+
+    // console.log("showCompleted", showCompleted)
+
     return (
-        <div>
-            <div>
-                <header>
+        <div class="flex justify-center items-center">
+            <div class="">
+                <header class="">
                     <h1>TODO</h1>
                     <input 
                         type="text" 
@@ -40,11 +42,13 @@ function Todo ({ handleChange, todos, handleAddTodo,
                 <ul>
                     {listItems}
                 </ul>
-            </div>
-            <div>
-                <button>All</button>
-                <button>Active</button>
-                <button onClick={handleShowCompleted}>Completed</button>
+                <div>
+                    <button class="mr-[2vw]">All</button>
+                    <button class="mr-[2vw]">Active</button>
+                    <button onClick={() => handleShowCompleted()}
+                        class="mr-[2vw]">Completed</button>
+                    <button class="mr-[2vw]">Clear Completed</button>
+                </div>
             </div>
         </div>
     )
