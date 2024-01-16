@@ -24,7 +24,7 @@ const todoSlice = createSlice({
             if (todo) {
                 todo.completed = !todo.completed;
                 console.log("slice", todo.completed)
-                if (todo.completed == true) {
+                if (todo.completed === true) {
                     state.completed.push(todo)
                 } else {
                     state.completed = state.completed.filter((t) => t.id !== action.payload)

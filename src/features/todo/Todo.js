@@ -1,20 +1,10 @@
 function Todo ({ handleChange, todos, handleAddTodo, 
     handleRemoveTodo, text, handleCheckedTodo,
-    handleShowCompleted, showCompleted, completed }) {
-    const listItems = showCompleted 
-        ? completed.map(completedTodo => 
-        <li key={completedTodo.id}>
-            <input type="checkbox" 
-                    id="check-list-item" 
-                    name="list-item-checkbox"
-                    onClick={() => handleCheckedTodo(completedTodo.id)}
-                    />
-                {completedTodo.text} 
-            <button onClick={()=>handleRemoveTodo(completedTodo.id)}>X</button>
-        </li>) 
-        : todos.map(todo => 
-        <li key={todo.id}
-            class={todo.completed ? "line-through" : 'none'}>
+    handleShowCompleted, showCompleted, completed, handleShowAll, 
+    showActive, handleShowActive }) {
+
+    let todoMapper = todo => (
+        <li key={todo.id}>
             <input type="checkbox" 
                     id="check-list-item" 
                     name="list-item-checkbox"
@@ -24,7 +14,17 @@ function Todo ({ handleChange, todos, handleAddTodo,
             <button onClick={()=>handleRemoveTodo(todo.id)}>X</button>
         </li>)
 
-    // console.log("showCompleted", showCompleted)
+    let listItems
+    
+    if (showCompleted) {
+        listItems = completed.map(todoMapper)
+    } else if (showActive) {
+        listItems = todos.filter(todo => !todo.completed).map(todoMapper)
+    } else {
+        listItems = todos.map(todoMapper)
+    }
+
+    console.log("showCompleted", showCompleted)
 
     return (
         <div class="flex justify-center items-center">
@@ -43,9 +43,11 @@ function Todo ({ handleChange, todos, handleAddTodo,
                     {listItems}
                 </ul>
                 <div>
-                    <button class="mr-[2vw]">All</button>
-                    <button class="mr-[2vw]">Active</button>
-                    <button onClick={() => handleShowCompleted()}
+                    <button class="mr-[2vw]" 
+                        onClick={handleShowAll}>All</button>
+                    <button class="mr-[2vw]" 
+                        onClick={handleShowActive}>Active</button>
+                    <button onClick={handleShowCompleted}
                         class="mr-[2vw]">Completed</button>
                     <button class="mr-[2vw]">Clear Completed</button>
                 </div>

@@ -9,6 +9,8 @@ function TodoContainer () {
     const dispatch = useDispatch()
     const [text, setText] = useState("")
     const [showCompleted, setShowCompleted] = useState(false)
+    const [showActive, setShowActive] = useState(false)
+    const [showAll, setShowAll] = useState(false)
 
     console.log("todos", todos)
 
@@ -23,7 +25,21 @@ function TodoContainer () {
     console.log("completed list", completed)
 
     const handleShowCompleted = () => {
-        setShowCompleted(!showCompleted)
+        setShowCompleted(true)
+        setShowActive(false)
+        setShowAll(false)
+    }
+
+    const handleShowActive = () => {
+        setShowActive(true)
+        setShowCompleted(false)
+        setShowAll(false)
+    }
+
+    const handleShowAll = () => {
+        setShowAll(true)
+        setShowActive(false)
+        setShowCompleted(false)
     }
 
     const handleAddTodo = () => {
@@ -43,8 +59,12 @@ function TodoContainer () {
             handleAddTodo={handleAddTodo}
             handleRemoveTodo={handleRemoveTodo}
             handleCheckedTodo={handleCheckedTodo}
+            handleShowActive={handleShowActive}
             handleShowCompleted={handleShowCompleted}
+            handleShowAll={handleShowAll}
             completed={completed}
+            showAll={showAll}
+            showActive={showActive}
             showCompleted={showCompleted}
             todos={todos}
             text={text}
