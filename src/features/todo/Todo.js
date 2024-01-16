@@ -1,7 +1,7 @@
 function Todo ({ handleChange, todos, handleAddTodo, 
     handleRemoveTodo, text, handleCheckedTodo,
     handleShowCompleted, showCompleted, completed, handleShowAll, 
-    showActive, handleShowActive }) {
+    showActive, handleShowActive, handleClearCompleted }) {
 
     let todoMapper = todo => (
         <li key={todo.id}>
@@ -49,7 +49,8 @@ function Todo ({ handleChange, todos, handleAddTodo,
                         onClick={handleShowActive}>Active</button>
                     <button onClick={handleShowCompleted}
                         class="mr-[2vw]">Completed</button>
-                    <button class="mr-[2vw]">Clear Completed</button>
+                    <button class="mr-[2vw]" 
+                        onClick={handleClearCompleted}>Clear Completed</button>
                 </div>
             </div>
         </div>

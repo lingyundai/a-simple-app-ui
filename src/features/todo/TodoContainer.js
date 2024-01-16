@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Todo from "./Todo"
 import { useDispatch, useSelector } from "react-redux"
-import { addTodo, removeTodo, checkTodo } from "./todoSlice"
+import { addTodo, removeTodo, checkTodo, clearCompleted } from "./todoSlice"
 
 function TodoContainer () {
     const todos = useSelector((state) => state.todo.todos)
@@ -42,6 +42,10 @@ function TodoContainer () {
         setShowCompleted(false)
     }
 
+    const handleClearCompleted = () => {
+        dispatch(clearCompleted())
+    }
+
     const handleAddTodo = () => {
         if (text) {
             dispatch(addTodo(text))
@@ -62,6 +66,7 @@ function TodoContainer () {
             handleShowActive={handleShowActive}
             handleShowCompleted={handleShowCompleted}
             handleShowAll={handleShowAll}
+            handleClearCompleted={handleClearCompleted}
             completed={completed}
             showAll={showAll}
             showActive={showActive}
